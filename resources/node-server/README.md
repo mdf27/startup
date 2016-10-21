@@ -33,6 +33,8 @@ For example navigating to: `http://localhost:8000/api/movie`
 While server is running you can see errors on the console (cmd) ocurring on the server and/or bad requests or not found URLs requested by the frontend.
 
 ### API
+The API have a delay on all responses, to simulate real server timing.
+
 ##### Get Movies
 The following URL is to get all movies without special parameters.
 ```
@@ -84,6 +86,8 @@ This method *returns* the ID of the newly created movie like this:
 ```javascript
 { id: 11 }
 ```
+
+**Note:** While server is open, all movie will be persisted in memory on the server, but newly created movies will be removed when the server is stoped/reseted.
 
 ##### Get Genres
 The following URL is to get all genres.

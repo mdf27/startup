@@ -125,7 +125,7 @@ describe("NodeJS Server API", function() {
 					title: "Lorem ipsum",
 					year:"2016",
 					released:"2016-04-29T00:00:00.0Z",
-					genre:"Action, Drama",
+					genre:"Comedy, Drama",
 					director:"John Doe",
 					actors:"Foo Bar, Dolor Sit",
 					plot:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor ipsum ut elit dignissim vestibulum. Nulla ullamcorper mauris in eros luctus luctus. Praesent id posuere tellus, et malesuada felis.",
@@ -166,7 +166,7 @@ describe("NodeJS Server API", function() {
 				var newId = 12;
 				var newMovie = {
 					year:"2016",
-					genre:"Action, Drama",
+					genre:"Comedy, Drama",
 					rating: 2
 				};
 
@@ -182,6 +182,41 @@ describe("NodeJS Server API", function() {
 
 					request.get(base_url + '/api/movie/' + newId, function(error, response, body) {
 						expect(response.statusCode).toBe(404);
+						done();
+					});
+				});
+			});
+
+			it("should create new genre", function(done) {
+				var newId = 12;
+				var newMovie = {
+					title: "Lorem ipsum",
+					year:"2016",
+					released:"2016-04-29T00:00:00.0Z",
+					genre:"CustomGenre",
+					director:"John Doe",
+					actors:"Foo Bar, Dolor Sit",
+					plot:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor ipsum ut elit dignissim vestibulum. Nulla ullamcorper mauris in eros luctus luctus. Praesent id posuere tellus, et malesuada felis.",
+					poster:"https://s-media-cache-ak0.pinimg.com/236x/63/35/b3/6335b33481b913f437b4e395cf71f9b6.jpg",
+					rating: 2
+				};
+
+				var options = {
+					method: 'post',
+					body: newMovie,
+					json: true,
+					url: base_url + '/api/movie'
+				};
+
+				request(options, function(error, response, body) {
+					expect(response.statusCode).toBe(201);
+					var data = body;
+					expect(data.id).toEqual(newId);
+
+					request.get(base_url + '/api/genre', function(error, response, body) {
+						expect(response.statusCode).toBe(200);
+						var data = JSON.parse(body);
+						expect(data.length).toEqual(10);
 						done();
 					});
 				});
