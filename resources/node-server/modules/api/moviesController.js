@@ -22,7 +22,7 @@ module.exports = {
 		if(movie !== undefined) {
 			res.status(200).send(movie);
 		} else {
-			console.log(('GET /api/movie/' + req.params.id + ' - Movie not found').yellow);
+			console.log(('GET /api/movies/' + req.params.id + ' - Movie not found').yellow);
 			res.status(404).send({error: 'The requested movie id was not found.'});
 		}
 	},
@@ -39,7 +39,7 @@ module.exports = {
 			var newId = moviesService.addMovie(req.body);
 			res.status(201).send({ id: newId });
 		} else {
-			console.log(('Bad request: POST /api/movie/ - ' + error).red);
+			console.log(('Bad request: POST /api/movies - ' + error).red);
 			res.status(400).send({error: 'Invalid request, please check parameters.'});
 		}
 	}
