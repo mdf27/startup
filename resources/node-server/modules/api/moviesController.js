@@ -1,4 +1,4 @@
-var movieService = require('./movieService');
+var moviesService = require('./moviesService');
 var utils = require('./utils');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
 		var order = (req.query.order !== undefined) ? utils.orderBy(req.query.order) : null;
 		var limit = (req.query.limit !== undefined) ? req.query.limit : undefined;
 
-		var result = movieService.listMovies()
+		var result = moviesService.listMovies()
 			.filter(search)
 			.filter(genre)
 			.sort(order)
@@ -17,7 +17,7 @@ module.exports = {
 		res.status(200).send(result);
 	},
 	getMovie: function(req, res) {
-		var movie = movieService.getMovie(req.params.id);
+		var movie = moviesService.getMovie(req.params.id);
 
 		if(movie !== undefined) {
 			res.status(200).send(movie);
@@ -36,7 +36,7 @@ module.exports = {
 		});
 
 		if(error === null) {
-			var newId = movieService.addMovie(req.body);
+			var newId = moviesService.addMovie(req.body);
 			res.status(201).send({ id: newId });
 		} else {
 			console.log(('Bad request: POST /api/movie/ - ' + error).red);

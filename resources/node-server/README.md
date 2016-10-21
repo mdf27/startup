@@ -32,7 +32,7 @@ So if you have an index.html on the public folder, this is the first thing you'l
 **NOTE:** For changing static content there is no need to stop/reset the server, a simple browser refresh should be enough. But for changing server code, you have to stop/start server manually.
 
 Finally once server is running, check the API.
-For example navigating to: `http://localhost:8000/api/movie`
+For example navigating to: `http://localhost:8000/api/movies`
 
 While server is running you can see errors on the console (cmd) ocurring on the server and/or bad requests or not found URLs requested by the frontend.
 
@@ -42,12 +42,12 @@ The API have a delay on all responses, to simulate real server timing.
 #### Get Movies
 The following URL is to get all movies without special parameters.
 ```
-GET /api/movie/
+GET /api/movies
 ```
 
 But also you can specify different parameters on the query string to be more specific like this:
 ```
-GET /api/movie/?search=mo&genre=Drama&order=rating&limit=3
+GET /api/movies?search=mo&genre=Drama&order=rating&limit=3
 ```
 The example above is a complete example of using all parameters, but all of the parameters are optional, it is not necessary to use all of them.
 
@@ -68,13 +68,13 @@ The example above is a complete example of using all parameters, but all of the 
 #### Get a specific movie
 The following URL is to get a specific movie by ID, in this case the movie with id=1.
 ```
-GET /api/movie/1
+GET /api/movies/1
 ```
 
 #### Create a specific movie
 The following URL to create a new movie.
 ```
-POST /api/movie
+POST /api/movies
 ```
 By using POST method, you can send through the body of the request a json with the movies data, for example:
 ```javascript
@@ -102,5 +102,5 @@ This method *returns* the ID of the newly created movie like this:
 #### Get Genres
 The following URL is to get all genres.
 ```
-GET /api/genre/
+GET /api/genres/
 ```

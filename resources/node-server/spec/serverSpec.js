@@ -13,9 +13,9 @@ describe("NodeJS Server API", function() {
 	});
 
 	describe("Movies API", function() {
-		describe("GET /api/movie/", function() {
+		describe("GET /api/movies", function() {
 			it("should list all movies", function(done) {
-				request.get(base_url + '/api/movie/', function(error, response, body) {
+				request.get(base_url + '/api/movies', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(10);
@@ -24,9 +24,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/movie/?search=hanks", function() {
+		describe("GET /api/movies?search=hanks", function() {
 			it("should search for movies with tom hanks", function(done) {
-				request.get(base_url + '/api/movie/?search=hanks', function(error, response, body) {
+				request.get(base_url + '/api/movies?search=hanks', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(2);
@@ -37,9 +37,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/movie/?search=hanks&genre=Animation", function() {
+		describe("GET /api/movies?search=hanks&genre=Animation", function() {
 			it("should search for a movie on a specific genre", function(done) {
-				request.get(base_url + '/api/movie/?search=hanks&genre=Animation', function(error, response, body) {
+				request.get(base_url + '/api/movies?search=hanks&genre=Animation', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(1);
@@ -49,9 +49,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/movie/?search=mo&genre=Drama&order=rating&limit=3", function() {
+		describe("GET /api/movies?search=mo&genre=Drama&order=rating&limit=3", function() {
 			it("should search for a movie, order and truncate results", function(done) {
-				request.get(base_url + '/api/movie/?search=mo&genre=Drama&order=rating&limit=3', function(error, response, body) {
+				request.get(base_url + '/api/movies?search=mo&genre=Drama&order=rating&limit=3', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(3);
@@ -63,9 +63,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/movie/?order=released&limit=5", function() {
+		describe("GET /api/movies?order=released&limit=5", function() {
 			it("should get the last 5 premier movies", function(done) {
-				request.get(base_url + '/api/movie/?order=released&limit=5', function(error, response, body) {
+				request.get(base_url + '/api/movies?order=released&limit=5', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(5);
@@ -79,9 +79,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/movie/?order=rating&limit=3", function() {
+		describe("GET /api/movies?order=rating&limit=3", function() {
 			it("should get the top 3 popular movies", function(done) {
-				request.get(base_url + '/api/movie/?order=rating&limit=3', function(error, response, body) {
+				request.get(base_url + '/api/movies?order=rating&limit=3', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(3);
@@ -93,9 +93,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/movie/1", function() {
+		describe("GET /api/movies/1", function() {
 			it("should get movie id 1", function(done) {
-				request.get(base_url + '/api/movie/1', function(error, response, body) {
+				request.get(base_url + '/api/movies/1', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.id).toEqual(1);
@@ -104,9 +104,9 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("GET /api/genre", function() {
+		describe("GET /api/genres", function() {
 			it("should list all genres", function(done) {
-				request.get(base_url + '/api/genre', function(error, response, body) {
+				request.get(base_url + '/api/genres', function(error, response, body) {
 					expect(response.statusCode).toBe(200);
 					var data = JSON.parse(body);
 					expect(data.length).toEqual(9);
@@ -118,7 +118,7 @@ describe("NodeJS Server API", function() {
 			});
 		});
 
-		describe("POST /api/movie", function() {
+		describe("POST /api/movies", function() {
 			it("should create movie and return new id", function(done) {
 				var newId = 11;
 				var newMovie = {
@@ -137,7 +137,7 @@ describe("NodeJS Server API", function() {
 					method: 'post',
 					body: newMovie,
 					json: true,
-					url: base_url + '/api/movie'
+					url: base_url + '/api/movies'
 				};
 
 				request(options, function(error, response, body) {
@@ -145,7 +145,7 @@ describe("NodeJS Server API", function() {
 					var data = body;
 					expect(data.id).toEqual(newId);
 
-					request.get(base_url + '/api/movie/' + newId, function(error, response, body) {
+					request.get(base_url + '/api/movies/' + newId, function(error, response, body) {
 						expect(response.statusCode).toBe(200);
 						var data = JSON.parse(body);
 						expect(data.id).toEqual(newId);
@@ -174,13 +174,13 @@ describe("NodeJS Server API", function() {
 					method: 'post',
 					body: newMovie,
 					json: true,
-					url: base_url + '/api/movie'
+					url: base_url + '/api/movies'
 				};
 
 				request(options, function(error, response, body) {
 					expect(response.statusCode).toBe(400);
 
-					request.get(base_url + '/api/movie/' + newId, function(error, response, body) {
+					request.get(base_url + '/api/movies/' + newId, function(error, response, body) {
 						expect(response.statusCode).toBe(404);
 						done();
 					});
@@ -205,7 +205,7 @@ describe("NodeJS Server API", function() {
 					method: 'post',
 					body: newMovie,
 					json: true,
-					url: base_url + '/api/movie'
+					url: base_url + '/api/movies'
 				};
 
 				request(options, function(error, response, body) {
@@ -213,7 +213,7 @@ describe("NodeJS Server API", function() {
 					var data = body;
 					expect(data.id).toEqual(newId);
 
-					request.get(base_url + '/api/genre', function(error, response, body) {
+					request.get(base_url + '/api/genres', function(error, response, body) {
 						expect(response.statusCode).toBe(200);
 						var data = JSON.parse(body);
 						expect(data.length).toEqual(10);
