@@ -1,0 +1,18 @@
+ul {
+	list-style: none;
+	display: inline;
+	float:left;
+	border-bottom: 1px Solid Black;
+}
+
+ul li {
+	display: block;
+	float: left;
+	margin-right: 10px;
+	position: relative;
+	text-align: center;
+}
+#container {
+	width: 750px;
+	background: #77BADB;
+}
