@@ -1,0 +1,12 @@
+<ul>                       
+			<label>City:</label>
+			<input ng-model="newCity">
+			<label>Country:</label>	
+			<input ng-model="newCountry">			
+			<button type="button" class="btn btn-success" ng-click="addCity()">Add</button>
+	      <hr>
+	      <li ng-repeat="city in cities | filter:query">
+	        {{city.name}} - {{city.country}}
+	      </li>
+	      <a href="#/">Volver</a>
+</ul> 
