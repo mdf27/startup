@@ -1,3 +1,25 @@
-<h1>Testing!</h1>
-
-Please replace me using your own index.html of your Movies App!
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS - Example</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<meta charset="utf-8">
+</head>
+<body  ng-app="AgularModule">
+	<div ng-view></div>
+	<script type='text/ng-template' id='main.html'>
+	    <ul>                       
+			<label>Filtro:</label>
+			<input ng-model="query">			
+	      <hr>
+	      <li ng-repeat="city in cities | filter:query">
+	        {{city.name}} - {{city.country}}
+	      </li>
+	      <a href="#add">Add new city</a>
+	    </ul> 
+	</script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.js""></script>
+	<script type="text/javascript" src="app.js"></script>	
+</body>
+</html>
